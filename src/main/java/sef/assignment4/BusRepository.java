@@ -26,4 +26,8 @@ public class BusRepository {
     public int countBuses() {
         return this.count;
     }
+
+    public void saveData() {
+
+    }
 }
