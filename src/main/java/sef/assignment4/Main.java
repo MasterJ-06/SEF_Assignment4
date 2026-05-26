@@ -4,6 +4,7 @@ public class Main {
     static void main() {
         DriverRepository driverRepository = new DriverRepository("drivers.txt");
         driverRepository.loadData();
+        System.out.println(driverRepository.retrieveDriver("123456789").getName());
 //        driverRepository.addDriver("123456789", "John Doe", 3, "A", "123 Main St", "1990-01-01");
 //        driverRepository.addDriver("987654321", "Jane Smith", 5, "B", "456 Elm St", "1985-05-15");
 //        driverRepository.saveData();

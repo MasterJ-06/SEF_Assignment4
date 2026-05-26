@@ -22,8 +22,15 @@ public class DriverRepository {
 
     }
 
-    public void retrieveDriver(String driverID) {
-
+    public Driver retrieveDriver(String driverID) {
+        Driver foundDriver = null;
+        for (Driver driver : this.drivers) {
+            if (driver.getDriverID().equals(driverID)) {
+                foundDriver = driver;
+                break;
+            }
+        }
+        return foundDriver;
     }
 
     public int countDrivers() {
