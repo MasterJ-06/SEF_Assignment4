@@ -5,12 +5,14 @@ public class Bus {
     private int capacity;
     private double fuelLevel;
     private String fuelType;
+    private String driverID;
 
-    public Bus(String busID, int capacity, double fuelLevel, String fuelType) {
+    public Bus(String busID, int capacity, double fuelLevel, String fuelType, String driverID) {
         this.busID = busID;
         this.capacity = capacity;
         this.fuelLevel = fuelLevel;
         this.fuelType = fuelType;
+        this.driverID = driverID;
     }
 
     public String getBusID() {
@@ -43,5 +45,13 @@ public class Bus {
 
     public void setFuelType(final String fuelType) {
         this.fuelType = fuelType;
+    }
+
+    public String getDriverID() {
+        return this.driverID;
+    }
+
+    public void setDriverID(final String driverID) {
+        this.driverID = driverID;
     }
 }
