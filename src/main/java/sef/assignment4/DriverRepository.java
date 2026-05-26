@@ -19,7 +19,21 @@ public class DriverRepository {
     }
 
     public void updateDriver(String driverIDToUpdate, String driverID, String name, int experienceYears, String licenseType, String address, String birthdate) {
-
+        Driver driverToUpdate = retrieveDriver(driverIDToUpdate);
+        if (driverToUpdate != null) {
+            if (experienceYears != -1) {
+                driverToUpdate.setExperienceYears(experienceYears);
+            }
+            if (licenseType != null && experienceYears <= 10) {
+                driverToUpdate.setLicenseType(licenseType);
+            }
+            if (address != null) {
+                driverToUpdate.setAddress(address);
+            }
+            if (birthdate != null) {
+                driverToUpdate.setBirthdate(birthdate);
+            }
+        }
     }
 
     public Driver retrieveDriver(String driverID) {
