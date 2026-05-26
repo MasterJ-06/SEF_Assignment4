@@ -2,14 +2,13 @@ package sef.assignment4;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DriverRepository {
     private ArrayList<Driver> drivers;
-    private int count;
     private String filename;
 
     public DriverRepository(String filename) {
-        this.count = 0;
         this.drivers = new ArrayList<>();
         this.filename = filename;
     }
@@ -17,7 +16,6 @@ public class DriverRepository {
     public void addDriver(String driverID, String name, int experienceYears, String licenseType, String address, String birthdate) {
         Driver driver = new Driver(driverID, name, experienceYears, licenseType, address, birthdate);
         this.drivers.add(driver);
-        ++this.count;
     }
 
     public void updateDriver(String driverID, int experienceYears, String licenseType, String address, String birthdate) {
@@ -29,7 +27,7 @@ public class DriverRepository {
     }
 
     public int countDrivers() {
-        return this.count;
+        return this.drivers.size();
     }
 
     public void saveData() {
@@ -47,6 +45,15 @@ public class DriverRepository {
     }
 
     public void loadData() {
-
+        try {
+            Scanner scanner = new Scanner(new File(filename));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] values = line.split("\\|");
+                this.addDriver(values[0], values[1], Integer.parseInt(values[2]), values[3], values[4], values[5]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

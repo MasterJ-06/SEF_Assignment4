@@ -2,25 +2,23 @@ package sef.assignment4;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BusRepository {
     private ArrayList<Bus> buses;
-    private int count;
     private String filename;
 
     public BusRepository(String filename) {
-        this.count = 0;
         this.buses = new ArrayList<>();
         this.filename = filename;
     }
 
-    public void addBus(String busID, int capacity, double fuelLevel, String fuelType) {
-        Bus bus = new Bus(busID, capacity, fuelLevel, fuelType);
+    public void addBus(String busID, int capacity, double fuelLevel, String fuelType, String driverID) {
+        Bus bus = new Bus(busID, capacity, fuelLevel, fuelType, driverID);
         this.buses.add(bus);
-        ++this.count;
     }
 
-    public void updateBus(String busID, int capacity, double fuelLevel, String fuelType) {
+    public void updateBus(String busID, int capacity, double fuelLevel, String fuelType, String driverID) {
 
     }
 
@@ -29,7 +27,7 @@ public class BusRepository {
     }
 
     public int countBuses() {
-        return this.count;
+        return this.buses.size();
     }
 
     public void saveData() {
@@ -37,7 +35,7 @@ public class BusRepository {
             new FileOutputStream(filename).close();
             BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
             for (Bus bus : buses) {
-                writer.write(bus.getBusID() + "|" + bus.getCapacity() + "|" + bus.getFuelLevel() + "|" + bus.getFuelType());
+                writer.write(bus.getBusID() + "|" + bus.getCapacity() + "|" + bus.getFuelLevel() + "|" + bus.getFuelType() + "|" + bus.getDriverID());
                 writer.newLine();
             }
             writer.close();
@@ -47,6 +45,15 @@ public class BusRepository {
     }
 
     public void loadData() {
-
+        try {
+            Scanner scanner = new Scanner(new File(filename));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] values = line.split("\\|");
+                this.addBus(values[0], Integer.parseInt(values[1]), Double.parseDouble(values[2]), values[3], values[4]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
