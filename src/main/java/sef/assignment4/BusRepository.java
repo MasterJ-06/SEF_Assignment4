@@ -22,8 +22,15 @@ public class BusRepository {
 
     }
 
-    public void retrieveBus(String busID) {
-
+    public Bus retrieveBus(String busID) {
+        Bus foundBus = null;
+        for (Bus bus : this.buses) {
+            if (bus.getBusID().equals(busID)) {
+                foundBus = bus;
+                break;
+            }
+        }
+        return foundBus;
     }
 
     public int countBuses() {

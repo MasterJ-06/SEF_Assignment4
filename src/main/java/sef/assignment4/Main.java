@@ -10,6 +10,7 @@ public class Main {
 //
         BusRepository busRepository = new BusRepository("buses.txt");
         busRepository.loadData();
+        System.out.println(busRepository.retrieveBus("123456789").getBusID());
 //        busRepository.addBus("123456789", 100, 10.0, "Diesel", "123456789");
 //        busRepository.addBus("987654321", 200, 20.0, "Petrol", "987654321");
 //        busRepository.saveData();
