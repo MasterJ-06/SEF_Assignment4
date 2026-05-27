@@ -14,6 +14,33 @@ public class DriverRepository {
     }
 
     public void addDriver(String driverID, String name, int experienceYears, String licenseType, String address, String birthdate) {
+        for (Driver driver : this.drivers) {
+            if (driver.getDriverID().equals(driverID)) {
+                throw new IllegalArgumentException("Driver ID already exists");
+            }
+        }
+        if (driverID.length() != 10) {
+            throw new IllegalArgumentException("Driver ID must be 10 characters long");
+        }
+        char char1 = driverID.charAt(0);
+        char char2 = driverID.charAt(1);
+        if (!(char1 >= '2' && char1 <= '9' && char2 >= '2' && char2 <= '9')) {
+            throw new IllegalArgumentException("The first two characters of the driver ID must be a number between 2 and 9");
+        }
+        char char9 = driverID.charAt(8);
+        char char10 = driverID.charAt(9);
+        if (!(char9 >= 'A' && char9 <= 'Z' && char10 >= 'A' && char10 <= 'Z')) {
+            throw new IllegalArgumentException("The last two characters of the driver ID must be a capital letter between A and Z");
+        }
+        int specialCharacterCount = 0;
+        for (int i = 2; i < 8; ++i) {
+            if (!Character.isLetterOrDigit(driverID.charAt(i)) && !Character.isWhitespace(driverID.charAt(i))) {
+                ++specialCharacterCount;
+            }
+        }
+        if (specialCharacterCount < 2) {
+            throw new IllegalArgumentException("The driver ID must contain at least two special characters");
+        }
         Driver driver = new Driver(driverID, name, experienceYears, licenseType, address, birthdate);
         this.drivers.add(driver);
     }
