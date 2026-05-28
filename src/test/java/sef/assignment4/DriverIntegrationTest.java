@@ -13,13 +13,13 @@ public class DriverIntegrationTest {
 
     @BeforeEach
     void setup() {
-        File file = new File("drivers.txt");
+        File file = new File("drivers_test.txt");
 
         if (file.exists()) {
             file.delete();
         }
 
-        repository = new DriverRepository("drivers.txt");
+        repository = new DriverRepository(file.getName());
     }
     @Test
     void testAddValidDriver() {
@@ -92,7 +92,7 @@ public class DriverIntegrationTest {
         repository.saveData();
 
         DriverRepository loadedRepository =
-                new DriverRepository("drivers.txt");
+                new DriverRepository(repository.getFilename());
 
         loadedRepository.loadData();
 

@@ -13,6 +13,10 @@ public class DriverRepository {
         this.filename = filename;
     }
 
+    public String getFilename() {
+        return this.filename;
+    }
+
     public void addDriver(String driverID, String name, int experienceYears, String licenseType, String address, String birthdate) {
         for (Driver driver : this.drivers) {
             if (driver.getDriverID().equals(driverID)) {
@@ -60,17 +64,17 @@ public class DriverRepository {
             if (licenseType != null && experienceYears <= 10) {
                 driverToUpdate.setLicenseType(licenseType);
             }
-            if (address != null) {
-                driverToUpdate.setAddress(address);
-            }
-            if (birthdate != null) {
-                driverToUpdate.setBirthdate(birthdate);
-            }
             if (!driverAddressVaild(address) && address != null) {
                 throw new IllegalArgumentException("The address is not in the correct format");
             }
             if (!driverBirthdateVaild(birthdate) && birthdate != null) {
                 throw new IllegalArgumentException("The birthdate is not in the correct format");
+            }
+            if (address != null) {
+                driverToUpdate.setAddress(address);
+            }
+            if (birthdate != null) {
+                driverToUpdate.setBirthdate(birthdate);
             }
         }
     }

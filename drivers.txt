@@ -1,2 +1,2 @@
-4534^6*8AZ|John Doe|3|A|123 Main St|1990-01-01
-98#65$32JF|Jane Smith|5|B|456 Elm St|1985-05-15
+67abc!@dXY,John,13,Heavy,124|La Trobe St|Melbourne|VIC|Australia,01-01-1990
+78abc!@dXY,Jane,5,PublicTransport,124|La Trobe St|Melbourne|VIC|Australia,15-05-1985

@@ -4,23 +4,47 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BusIntegrationTest {
 
     private BusRepository repository;
+    private DriverRepository driverRepository;
 
     @BeforeEach
-    void setup() {
+    void setup() throws IOException {
 
-        File file = new File("buses.txt");
+        File busFile = new File("buses_test.txt");
+        File driverFile = new File("drivers_test.txt");
 
-        if (file.exists()) {
-            file.delete();
-        }
+        busFile.delete();
+        driverFile.delete();
+        busFile.createNewFile();
+        driverFile.createNewFile();
 
-        repository = new BusRepository("buses.txt");
+        driverRepository = new DriverRepository(driverFile.getName());
+
+        driverRepository.addDriver(
+                "57abc!@dAZ",
+                "John",
+                10,
+                "Heavy",
+                "124|La Trobe St|Melbourne|VIC|Australia",
+                "12-05-1997"
+        );
+        driverRepository.addDriver(
+                "67abc!@dXY",
+                "Jane",
+                10,
+                "Heavy",
+                "124|La Trobe St|Melbourne|VIC|Australia",
+                "12-05-1997"
+        );
+        driverRepository.saveData();
+
+        repository = new BusRepository(busFile.getName(), driverFile.getName());
     }
 
     @Test
@@ -92,7 +116,7 @@ public class BusIntegrationTest {
         repository.saveData();
 
         BusRepository loadedRepository =
-                new BusRepository("buses.txt");
+                new BusRepository(repository.getFilename(), driverRepository.getFilename());
 
         loadedRepository.loadData();
 
