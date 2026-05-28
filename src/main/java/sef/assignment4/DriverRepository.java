@@ -83,7 +83,7 @@ public class DriverRepository {
             new FileOutputStream(filename).close();
             BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
             for (Driver driver : drivers) {
-                writer.write(driver.getDriverID() + "|" + driver.getName() + "|" + driver.getExperienceYears() + "|" + driver.getLicenseType() + "|" + driver.getAddress() + "|" + driver.getBirthdate());
+                writer.write(driver.getDriverID() + "," + driver.getName() + "," + driver.getExperienceYears() + "," + driver.getLicenseType() + "," + driver.getAddress() + "," + driver.getBirthdate());
                 writer.newLine();
             }
             writer.close();
@@ -97,7 +97,7 @@ public class DriverRepository {
             Scanner scanner = new Scanner(new File(filename));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] values = line.split("\\|");
+                String[] values = line.split(",");
                 this.addDriver(values[0], values[1], Integer.parseInt(values[2]), values[3], values[4], values[5]);
             }
         } catch (IOException e) {
