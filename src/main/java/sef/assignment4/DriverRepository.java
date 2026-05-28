@@ -41,6 +41,12 @@ public class DriverRepository {
         if (specialCharacterCount < 2) {
             throw new IllegalArgumentException("The driver ID must contain at least two special characters");
         }
+        if (!driverAddressVaild(address)) {
+            throw new IllegalArgumentException("The address is not in the correct format");
+        }
+        if (!driverBirthdateVaild(birthdate)) {
+            throw new IllegalArgumentException("The birthdate is not in the correct format");
+        }
         Driver driver = new Driver(driverID, name, experienceYears, licenseType, address, birthdate);
         this.drivers.add(driver);
     }
@@ -59,6 +65,12 @@ public class DriverRepository {
             }
             if (birthdate != null) {
                 driverToUpdate.setBirthdate(birthdate);
+            }
+            if (!driverAddressVaild(address) && address != null) {
+                throw new IllegalArgumentException("The address is not in the correct format");
+            }
+            if (!driverBirthdateVaild(birthdate) && birthdate != null) {
+                throw new IllegalArgumentException("The birthdate is not in the correct format");
             }
         }
     }
@@ -103,5 +115,13 @@ public class DriverRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean driverAddressVaild(String address) {
+        return address.matches("^[0-9]+\\|[^|]+\\|[^|]+\\|[^|]+\\|[^|]+$");
+    }
+
+    private boolean driverBirthdateVaild(String birthdate) {
+        return birthdate.matches("^[0-9]{2}-[0-9]{2}-[0-9]{4}$");
     }
 }
