@@ -13,10 +13,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 25
-        uses: actions/actions-setup-java@v4
+        uses: actions/setup-java@v4
         with:
           java-version: '25'
-          distribution: 'temurin' # Eclipse Temurin supports Java 25 LTS
+          distribution: 'temurin' # Eclipse Temurin supports Java 25
           cache: 'maven'
 
       - name: Run JUnit tests
