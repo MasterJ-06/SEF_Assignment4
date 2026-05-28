@@ -1,0 +1,23 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/actions-setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin' # Eclipse Temurin supports Java 25 LTS
+          cache: 'maven'
+
+      - name: Run JUnit tests
+        run: mvn test
