@@ -64,10 +64,10 @@ public class DriverRepository {
             if (licenseType != null && experienceYears <= 10) {
                 driverToUpdate.setLicenseType(licenseType);
             }
-            if (!driverAddressVaild(address) && address != null) {
+            if (address != null && !driverAddressVaild(address)) {
                 throw new IllegalArgumentException("The address is not in the correct format");
             }
-            if (!driverBirthdateVaild(birthdate) && birthdate != null) {
+            if (birthdate != null && !driverBirthdateVaild(birthdate)) {
                 throw new IllegalArgumentException("The birthdate is not in the correct format");
             }
             if (address != null) {

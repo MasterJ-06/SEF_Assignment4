@@ -103,13 +103,15 @@ public class BusRepository {
                     (driver.getLicenseType().equals("Medium") && busToUpdate.getFuelType().equals("Electricity")) || driver.getLicenseType().equals("Medium") && busToUpdate.getFuelType().equals("Hybrid")) {
                 throw new IllegalArgumentException("Only drivers holding a Heavy or Public Transport licence are permitted to operate electric and hybrid buses");
             }
-            if (!(driverID.equals(busToUpdate.getDriverID()))) {
+            if (driverID != null && !(driverID.equals(busToUpdate.getDriverID()))) {
                 busToUpdate.setDriverID(driverID);
             }
             if (fuelLevel < 0) {
                 throw new IllegalArgumentException("Fuel level cannot be negative");
             }
-            busToUpdate.setFuelLevel(fuelLevel);
+            if (fuelLevel >= 0) {
+                busToUpdate.setFuelLevel(fuelLevel);
+            }
         }
     }
 
