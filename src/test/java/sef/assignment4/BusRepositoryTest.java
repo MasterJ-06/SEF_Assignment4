@@ -77,7 +77,7 @@ public class BusRepositoryTest {
         busRepository = new BusRepository(busFile.getName(), driverFile.getName());
     }
 
-    //  Bus ID – Format Validation
+    //  Bus ID
 
     @Test
     void validBusID_isAccepted() {
@@ -115,7 +115,7 @@ public class BusRepositoryTest {
         );
     }
 
-    //  Bus Capacity – Update Rules
+    //  Bus Capacity
 
     @Test
     void increaseBusCapacity_byOne_isRejected() {
