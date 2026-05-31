@@ -32,8 +32,14 @@ public class DriverIntegrationTest {
                 "124|La Trobe St|Melbourne|VIC|Australia",
                 "13-05-1999"
         );
+        Driver driver = repository.retrieveDriver("57abc!@dAZ"); //Store driver locally
 
-        assertEquals(1, repository.countDrivers());
+        repository.saveData(); // clear repsotory cache and relaod
+        repository.clearCacheDrivers();
+        repository.loadData();
+        Driver newDriver = repository.retrieveDriver("57abc!@dAZ");
+        
+        assertEquals(true, newDriver.equals(driver));
 
     }
     @Test
@@ -52,7 +58,7 @@ public class DriverIntegrationTest {
                 repository.retrieveDriver("57abc!@dAZ");
 
         assertNotNull(driver);
-
+        
         assertEquals("Aayan", driver.getName());
     }
     @Test

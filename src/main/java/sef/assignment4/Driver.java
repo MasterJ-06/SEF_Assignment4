@@ -64,4 +64,32 @@ public class Driver {
     public void setBirthdate(final String birthdate) {
         this.birthdate = birthdate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        try {
+            if (o == null || getClass() != o.getClass()) {
+                System.err.println("Invalid Class");
+                return false;
+            }
+
+            Driver otherDriver = (Driver) o;
+            return (
+                address.equals(otherDriver.address) &&
+                birthdate.equals(otherDriver.birthdate) &&
+                driverID.equals(otherDriver.driverID) &&
+                experienceYears == otherDriver.experienceYears && 
+                licenseType.equals(otherDriver.licenseType) &&
+                name.equals(otherDriver.name)
+            );
+            
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
+        return false;
+        
+    }
+    public String toString() {
+        return this.driverID + " " + this.name + " " + this.experienceYears + " " + this.licenseType + " " + birthdate;
+    }
 }
