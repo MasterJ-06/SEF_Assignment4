@@ -1,6 +1,7 @@
 package sef.assignment4;
 
 import java.io.*;
+import java.lang.foreign.ValueLayout;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -121,7 +122,14 @@ public class DriverRepository {
             Scanner scanner = new Scanner(new File(filename));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] values = line.split(",");
+
+                String[] values = new String[line.split(",").length];
+                int i = 0;
+                for (String v : line.trim().split(",")) {
+                    values[i] = v.trim();
+                    i++;
+                }
+
                 this.addDriver(values[0], values[1], Integer.parseInt(values[2]), values[3], values[4], values[5]);
             }
             scanner.close();
