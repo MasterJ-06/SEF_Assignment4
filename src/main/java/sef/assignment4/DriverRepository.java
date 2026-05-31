@@ -108,6 +108,14 @@ public class DriverRepository {
         }
     }
 
+    public void clearCacheDrivers() {
+        try {
+            drivers.clear();
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
     public void loadData() {
         try {
             Scanner scanner = new Scanner(new File(filename));
@@ -116,6 +124,7 @@ public class DriverRepository {
                 String[] values = line.split(",");
                 this.addDriver(values[0], values[1], Integer.parseInt(values[2]), values[3], values[4], values[5]);
             }
+            scanner.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

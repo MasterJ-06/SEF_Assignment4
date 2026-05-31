@@ -152,6 +152,7 @@ public class BusRepository {
                 String[] values = line.split(",");
                 this.addBus(values[0], Integer.parseInt(values[1]), Double.parseDouble(values[2]), values[3], values[4]);
             }
+            scanner.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
