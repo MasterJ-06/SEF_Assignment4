@@ -34,6 +34,7 @@ public class DriverIntegrationTest {
         );
 
         assertEquals(1, repository.countDrivers());
+
     }
     @Test
     void testRetrieveDriver() {
@@ -74,7 +75,10 @@ public class DriverIntegrationTest {
                 "200|George St|Sydney|NSW|Australia",
                 "10-10-1997"
         );
-
+        repository.saveData();
+        repository.clearCacheDrivers();
+        repository.loadData();  
+        
         assertEquals(2, repository.countDrivers());
     }
     @Test
