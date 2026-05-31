@@ -108,6 +108,26 @@ public class DriverIntegrationTest {
 
         assertTrue(loadedRepository.equals(repository));
 
-        
+
+    }
+
+    @Test
+    void testAddInvlidDriverStoreRetrieve() {
+
+        repository.addDriver(
+                "57abc!@dAZ",
+                "Aayan",
+                5,
+                "Heavy",
+                "124|La Trobe St|Melbourne|VIC|Australia",
+                "13-05-1999"
+        );
+
+        repository.clearCacheDrivers();
+        repository.saveData(); // clear repsotory cache and relaod
+        repository.loadData();
+
+        assertEquals(0, repository.countDrivers()); // expect no saved drivers
+        assertEquals(null, repository.retrieveDriver("invlidDriverStringLengthExpectingFail")); // expect no result when
     }
 }
