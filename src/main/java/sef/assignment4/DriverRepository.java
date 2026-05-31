@@ -2,6 +2,7 @@ package sef.assignment4;
 
 import java.io.*;
 import java.lang.foreign.ValueLayout;
+import java.security.KeyStore.TrustedCertificateEntry;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -144,5 +145,33 @@ public class DriverRepository {
 
     private boolean driverBirthdateVaild(String birthdate) {
         return birthdate.matches("^[0-9]{2}-[0-9]{2}-[0-9]{4}$");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        try {
+            if (o == null || getClass() != o.getClass()) {
+                System.err.println("Invalid Class");
+                return false;
+            }
+
+            DriverRepository otherRepo = (DriverRepository) o;
+
+            for (Driver d : otherRepo.drivers) {
+                String currID = d.getDriverID();
+                Driver thisDriver = this.retrieveDriver(currID);
+
+                if (thisDriver == null || !d.equals(thisDriver)) {
+                    return false; // if thisDriver no result OR Driver details arent the EXACT same return false
+                }
+                
+            }
+            return true;
+            
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
+        return false;
+
     }
 }

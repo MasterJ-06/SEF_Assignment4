@@ -22,7 +22,7 @@ public class DriverIntegrationTest {
         repository = new DriverRepository(file.getName());
     }
     @Test
-    void testAddValidDriver() {
+    void testAddValidDriverStore() {
 
         repository.addDriver(
                 "57abc!@dAZ",
@@ -38,8 +38,8 @@ public class DriverIntegrationTest {
         repository.clearCacheDrivers();
         repository.loadData();
         Driver newDriver = repository.retrieveDriver("57abc!@dAZ");
-        
-        assertEquals(true, newDriver.equals(driver));
+
+        assertTrue(newDriver.equals(driver));
 
     }
     @Test
@@ -88,7 +88,7 @@ public class DriverIntegrationTest {
         assertEquals(2, repository.countDrivers());
     }
     @Test
-    void testSaveAndLoadDriverData() {
+    void testDriverPersistence() {
 
         repository.addDriver(
                 "57abc!@dAZ",
@@ -106,11 +106,8 @@ public class DriverIntegrationTest {
 
         loadedRepository.loadData();
 
-        assertEquals(1, loadedRepository.countDrivers());
+        assertTrue(loadedRepository.equals(repository));
 
-        Driver loadedDriver =
-                loadedRepository.retrieveDriver("57abc!@dAZ");
-
-        assertEquals("Aayan", loadedDriver.getName());
+        
     }
 }
