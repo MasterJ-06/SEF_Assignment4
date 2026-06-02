@@ -84,6 +84,7 @@ public class BusRepositoryTest {
         assertDoesNotThrow(() ->
             busRepository.addBus("12345678", 30, 50.0, "Diesel", "57abc!@dAZ")
         );
+        assertEquals(1, busRepository.countBuses());
     }
 
     @Test
